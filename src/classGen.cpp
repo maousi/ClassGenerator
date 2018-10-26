@@ -21,7 +21,7 @@ ClassGen::ClassGen(int argc, char** argv) {
 	if(sz < 1)
 		throw std::string("You must specify the name of the class");
 	if(!checkName(multi[0]))
-		throw std::string("The class name is invalid");
+		throw std::string("The name of the class is invalid");
 	mClassName = multi[0];
 	if(sz > 1) {
 		path = multi[1];
@@ -55,6 +55,7 @@ ClassGen::ClassGen(int argc, char** argv) {
 			throw std::string("Cannot create '"+fNameCpp+"'. '"+fNameH+"' has been written.");
 		output << cpp;
 		output.close();
+		std::cout << "Files '"+fNameH+"' and '"+ fNameCpp+"' sucessfully written\n";
 	}
 }
 
@@ -86,6 +87,11 @@ std::string ClassGen::getH() const {
 
 // STATIC
 bool ClassGen::checkName(const  std::string &n) {
+	std::string forbidden(":;,.-<>\\/{}[]$|@#+\"*%&()=?!~^'°¬");
+	for(char c : forbidden) {
+		if(n.find(c) != std::string::npos)
+			return false;
+	}
 	
 	return true;
 }
