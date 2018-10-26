@@ -2,7 +2,6 @@
 #include <algorithm>
 #include <iostream>
 #include <fstream>
-#include <experimental/filesystem>
 
 ClassGen::ClassGen(int argc, char** argv) {
 	TCLAP::CmdLine cmd("Class generator");
